@@ -82,8 +82,13 @@ class PhotoCloseupViewController: UIViewController {
     
     // reset zoomScale on scrollView on orientation change because otherwise the photo display gets messed up. Also reset scroll position in textView because that can also get messed up
     lazy var didRotate: (Notification) -> Void = { notification in
-        self.scrollView.zoomScale = 1.0
-        self.textView.contentOffset = CGPoint(x: 0.0, y: 0.0)
+        switch UIDevice.current.orientation {
+        case .landscapeLeft, .landscapeRight, .portrait, .portraitUpsideDown:
+            self.scrollView.zoomScale = 1.0
+            self.textView.contentOffset = CGPoint(x: 0.0, y: 0.0)
+        case .faceUp, .faceDown, .unknown:
+            break
+        }
     }
 }
 
