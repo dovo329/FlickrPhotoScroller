@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="PhotoCell" customModule="JanePhotoScroller" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="300"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QdG-YY-0u9">
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="300"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                </imageView>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="xXf-nj-ddl">
+                    <rect key="frame" x="190" y="140" width="20" height="20"/>
+                    <color key="color" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                </activityIndicatorView>
+            </subviews>
+            <color key="backgroundColor" red="0.80392156859999997" green="0.80392156859999997" blue="0.80392156859999997" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="QdG-YY-0u9" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="Hqz-jx-EuQ"/>
+                <constraint firstItem="xXf-nj-ddl" firstAttribute="centerX" secondItem="QdG-YY-0u9" secondAttribute="centerX" id="MYc-l7-JWK"/>
+                <constraint firstItem="QdG-YY-0u9" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="i1J-iI-UAb"/>
+                <constraint firstItem="xXf-nj-ddl" firstAttribute="centerY" secondItem="QdG-YY-0u9" secondAttribute="centerY" id="kBE-bZ-Y55"/>
+                <constraint firstItem="QdG-YY-0u9" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="lbi-Qw-Uv2"/>
+                <constraint firstItem="QdG-YY-0u9" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="sLd-An-zm1"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="activityIndicator" destination="xXf-nj-ddl" id="3n6-si-coa"/>
+                <outlet property="imageView" destination="QdG-YY-0u9" id="U6M-ah-WXD"/>
+            </connections>
+        </view>
+    </objects>
+</document>
