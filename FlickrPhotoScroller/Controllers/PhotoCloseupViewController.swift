@@ -80,13 +80,13 @@ class PhotoCloseupViewController: UIViewController {
         NotificationCenter.default.removeObserver(self, name: .UIDeviceOrientationDidChange, object: nil)
     }
     
-    // reset zoomScale on scrollView on orientation change because otherwise the photo display gets messed up. Also reset scroll position in textView because that can also get messed up
+    // reset zoomScale on scrollView on valid orientation change because otherwise the photo display gets messed up. Also reset scroll position in textView because that can also get messed up
     lazy var didRotate: (Notification) -> Void = { notification in
         switch UIDevice.current.orientation {
-        case .landscapeLeft, .landscapeRight, .portrait, .portraitUpsideDown:
+        case .landscapeLeft, .landscapeRight, .portrait:
             self.scrollView.zoomScale = 1.0
             self.textView.contentOffset = CGPoint(x: 0.0, y: 0.0)
-        case .faceUp, .faceDown, .unknown:
+        case .faceUp, .faceDown, .unknown, .portraitUpsideDown:
             break
         }
     }

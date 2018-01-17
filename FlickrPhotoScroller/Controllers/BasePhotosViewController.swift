@@ -65,6 +65,7 @@ class BasePhotosViewController: UIViewController {
         
         // initialize the number of columns for the collectionView's flow layout
         if let flowLayout = self.collectionView.collectionViewLayout as? PhotoCollectionViewLayout {
+            // The UIScreen.main.bounds.width seems to be reported correctly on app startup, so we can just use that here
             flowLayout.updateForScreen(width: UIScreen.main.bounds.width)
         }
         
@@ -90,15 +91,7 @@ class BasePhotosViewController: UIViewController {
     
     // had to use this notifications for orientation change instead of viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) because in viewWillTransition the collectionView was nil, even though the IBOutlet for collectionView should never be nil.
     lazy var didRotate: (Notification) -> Void = { notification in
-        if let flowLayout = self.collectionView.collectionViewLayout as? PhotoCollectionViewLayout {
-            switch UIDevice.current.orientation {
-            case .landscapeLeft, .landscapeRight, .portrait, .portraitUpsideDown:
-                flowLayout.updateForScreen(width: UIScreen.main.bounds.width)
-                self.collectionView.reloadData()
-            case .faceUp, .faceDown, .unknown:
-                break
-            }
-        }
+        self.updateGridLayoutBasedOnCurrentOrientation()
     }
     
     // MARK: - Refresh Control
@@ -111,6 +104,25 @@ class BasePhotosViewController: UIViewController {
         }
         delegate.getMorePhotos(shouldResetDataSource: true)
         refreshControl.endRefreshing()
+    }
+    
+    // MARK: - Utility
+    func updateGridLayoutBasedOnCurrentOrientation() {
+        if let flowLayout = self.collectionView.collectionViewLayout as? PhotoCollectionViewLayout {
+            switch UIDevice.current.orientation {
+            // The UIScreen.main.bounds.width and height may not be reported correctly in this method, but the orientation in this method is, so we'll just compute what the width really is given the orientation by taking the max or min of the reported width and height.
+            case .landscapeLeft, .landscapeRight:
+                flowLayout.updateForScreen(width: max(UIScreen.main.bounds.width, UIScreen.main.bounds.height))
+                self.collectionView.reloadData()
+                
+            case  .portrait:
+                flowLayout.updateForScreen(width: min(UIScreen.main.bounds.width, UIScreen.main.bounds.height))
+                self.collectionView.reloadData()
+                
+            case .faceUp, .faceDown, .unknown, .portraitUpsideDown:
+                break
+            }
+        }
     }
 }
 
