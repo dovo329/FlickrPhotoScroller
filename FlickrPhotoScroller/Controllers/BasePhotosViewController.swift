@@ -165,7 +165,7 @@ extension BasePhotosViewController : UICollectionViewDelegate
             if let photoCell = cell as? PhotoCell {
                 // normal photo cell
                 let photo = dataSource[indexPath.row]
-                photoCell.configure(for: photo)
+                photoCell.configure(for: photo, delegate: self, indexPath: indexPath)
             }
         }
         // else is loading cell which needs no configuration
@@ -207,5 +207,14 @@ extension BasePhotosViewController : UIScrollViewDelegate
                 }
             }
         }
+    }
+}
+
+// Mark: - PhotoCellDelegate
+
+extension BasePhotosViewController : PhotoCellDelegate {
+    func photoUrlDownload(error: Error, indexPath: IndexPath) {
+        print("Error downloading image for cell \(error)")
+        collectionView.reloadItems(at: [indexPath])
     }
 }
