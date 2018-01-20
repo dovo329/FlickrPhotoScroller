@@ -15,10 +15,6 @@ struct SegueId {
     static let userPhotosToPhotoCloseup = "segueIdUserPhotosToPhotoCloseup"
 }
 
-struct PhotoCellColors {
-    static let normalCellBackgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 1.0)
-}
-
 struct PhotoDataSource {
     static let pageSize = 100
 }
